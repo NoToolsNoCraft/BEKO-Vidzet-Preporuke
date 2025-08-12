@@ -11,9 +11,10 @@
     }
 
     p, ul, li {
-    font-size: 1.2rem; /* Adjust this value as needed */
-    line-height: 1.6;
-  }
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
     #compatPanel {
       position: fixed;
       top: 0;
@@ -47,45 +48,43 @@
       color: #000;
     }
 
-    #openCompatButton {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 9999px;
-      padding: 0.75rem 1.25rem;
-      font-weight: 600;
-      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.4);
-      cursor: pointer;
-      z-index: 100;
-      transition: background-color 0.2s;
-    }
-
-    #openCompatButton:hover {
-      background-color: #1e40af;
-    }
-
-
-
-
-    
-    /* Base styling for button */
     #compat-btn {
-      background-color: #0072C6;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: linear-gradient(45deg, #0072C6, #00a1ff);
       color: white;
-      padding: 12px 20px;
       border: none;
-      border-radius: 36px;
-      font-size: 16px;
-      cursor: pointer;
+      border-radius: 50px;
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
       font-weight: bold;
-      transition: background-color 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0, 114, 198, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      animation: pulse 2s infinite;
     }
 
     #compat-btn:hover {
-      background-color: #005ca1;
+      background: linear-gradient(45deg, #005ca1, #0083d6);
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 114, 198, 0.4);
+    }
+
+    #compat-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
     }
 
     .slide-in-panel {
@@ -109,7 +108,6 @@
       transform: translateX(0%);
     }
 
-    /* Close button */
     .close-btn {
       position: absolute;
       top: 6px;
@@ -126,7 +124,6 @@
       color: #333;
     }
 
-    /* Typography */
     .slide-in-panel h2 {
       font-size: 24px;
       margin-bottom: 24px;
@@ -134,7 +131,6 @@
       font-weight: 600;
     }
 
-    /* Form fields */
     #compat-form {
       display: flex;
       flex-direction: column;
@@ -174,7 +170,6 @@
       background-color: #005ca1;
     }
 
-    /* Initial prompt and form container styling */
     #initial-prompt {
       padding: 12px;
       background-color: #e6f2ff;
@@ -184,49 +179,49 @@
       font-weight: 500;
       margin-top: 16px;
     }
-    
+
     #form-fields-container {
-      display: none; /* Hidden by default */
+      display: none;
       flex-direction: column;
       gap: 16px;
     }
 
     .form-row {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;   
-        align-items: flex-end;         
-        }
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
 
-        .form-row label {
-        flex: 1;
-        min-width: 0;              
-        display: flex;
-        flex-direction: column;
-        }
+    .form-row label {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
 
-        input[type="number"] {
-        width: 100%;
-        box-sizing: border-box;     
-        max-width: 100%;            
-        }
+    input[type="number"] {
+      width: 100%;
+      box-sizing: border-box;
+      max-width: 100%;
+    }
 
     .appliance-fields {
       margin-top: 1rem;
     }
+
     .appliance-fields fieldset {
       border: 1px solid #ccc;
       border-radius: 4px;
       padding: 10px;
       margin-top: 16px;
     }
-    
+
     .appliance-fields legend {
       font-weight: bold;
       padding: 0 5px;
     }
 
-    /* Result section */
     #compat-results {
       margin-top: 24px;
       font-size: 1.1rem;
@@ -242,6 +237,14 @@
       border-radius: 6px;
       padding: 12px;
       margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .product-item img {
+      width: 100px;
+      height: auto;
+      border-radius: 4px;
     }
 
     .product-item a {
@@ -260,13 +263,13 @@
     }
 
     .checkbox-label {
-        display: flex;
-        flex-direction: row !important; /* Override default label styling */
-        align-items: center;
-        gap: 8px; /* Adds space between the checkbox and the label text */
-        margin-top: 1rem;
-        }
-    /* Responsive adjustments */
+      display: flex;
+      flex-direction: row !important;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+
     @media (max-width: 768px) {
       .slide-in-panel {
         width: 100%;
@@ -274,25 +277,69 @@
         padding: 24px 16px;
       }
 
+      #compat-btn {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #sort-select {
+      margin-bottom: 16px;
+      padding: 8px;
+      font-size: 1rem;
+    }
+
+    .loading {
+      text-align: center;
+      font-style: italic;
     }
   </style>
 </head>
 
-<!-- Sticky Button -->
-<div id="button-position" style="position: fixed; bottom: 250px; right: 20px; z-index: 1000;">
-  <button id="compat-btn" aria-controls="compat-panel" aria-expanded="false">
-    Preporuka uređaja<br> po tvojoj meri
-  </button>
-</div>
 <body class="bg-white text-black font-times-new-roman">
+  <!-- Sticky Button -->
+  <div id="button-position" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;">
+    <button id="compat-btn" aria-controls="compat-panel" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8m0 3a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+      </svg>
+      Pronađi Savršen Uređaj
+    </button>
+  </div>
 
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-blue-100 via-white to-blue-50 p-8 text-center">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">BEKO Vidžet Preporuke</h1>
       <p class="md:text-xl text-black mb-6">Interaktivni alat za pronalaženje idealnog uređaja – brzo, jednostavno i personalizovano.</p>
-      
-      
     </div>
   </section>
 
@@ -303,7 +350,7 @@
         <h2 class="text-3xl font-semibold mb-4 text-blue-600">Šta je BEKO "Preporuka uređaja po tvojoj meri" vidžet?</h2>
         <p class="text-black">Ovaj vidžet je interaktivni alat osmišljen za BEKO sajtove, koji korisnicima omogućava da pronađu idealan kućni aparat na osnovu dimenzija prostora, budžeta i preferencija.</p>
         <p class="text-black">______________________________</p>
-        <p class="text-black">Pogledaj demo aplikacije klikom na dugme <b>"Preporuka uređaja po tvojoj meri"</b></p>
+        <p class="text-black">Pogledaj demo aplikacije klikom na dugme <b>"Pronađi Savršen Uređaj"</b></p>
       </div>
 
       <div class="text-center">
@@ -364,14 +411,14 @@
       
       <div id="form-fields-container">
         <div class="form-row">
-          <label for="width">Širina prostora (cm):
+          <label for="width" class="tooltip">Širina prostora (cm): <span class="tooltiptext">Izmerite dostupnu širinu u cm</span>
             <input type="number" id="width" name="width" min="30" max="200" step="1" required>
           </label>
-          <label for="height">Visina prostora (cm):
+          <label for="height" class="tooltip">Visina prostora (cm): <span class="tooltiptext">Izmerite dostupnu visinu u cm</span>
             <input type="number" id="height" name="height" min="50" max="250" step="1" required>
           </label>
         </div>
-        <label for="depth">Dubina prostora (cm):
+        <label for="depth" class="tooltip">Dubina prostora (cm): <span class="tooltiptext">Izmerite dostupnu dubinu u cm</span>
           <input type="number" id="depth" name="depth" min="30" max="150" step="1" required>
         </label>
         
@@ -390,6 +437,8 @@
               <option value="A">A</option>
               <option value="B">B</option>
               <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
             </select>
           </label>
         </div>
@@ -410,33 +459,16 @@
   </aside>
 
   <script>
-
-    
-
-  
-  
-
     document.addEventListener('DOMContentLoaded', () => {
-
       const requiredFields = document.querySelectorAll('#compat-form [required]');
-
       requiredFields.forEach(input => {
-        // 2. Kad korisnik pokuša submit, a polje je prazno
         input.addEventListener('invalid', (e) => {
-          // Unikatan tekst – može biti isti za sva polja
-          // ili zavisno od samog polja (vidi varijantu B ispod)
           input.setCustomValidity('Molimo popunite ovo polje.');
         });
-
-        // 3. Čim korisnik počne da menja vrednost, izbrišite staru poruku
         input.addEventListener('input', () => {
           input.setCustomValidity('');
         });
       });
-
-
-
-
 
       const compatBtn = document.getElementById('compat-btn');
       const compatPanel = document.getElementById('compat-panel');
@@ -449,115 +481,126 @@
 
       const products = [
         {
-          id: 'fridge1',
-          type: 'fridge',
-          name: 'BEKO RCNA366E40ZXBN',
-          width: 59.5,
-          height: 185.2,
-          depth: 67,
-          voltage: 220,
-          energyClass: 'A',
-          features: ['nofrost', 'eco'],
-          price: 54990,
-          isBuiltIn: false,
-          freezerVolume: 109,
-          fridgeVolume: 215,
-          url: 'https://www.bshop.co.rs/proizvodi/frizideri/beko-rcna366e40zxbn',
-          imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
-        },
-        {
-          id: 'fridge2',
-          type: 'fridge',
-          name: 'BEKO BCHA275E3SN',
-          width: 54,
-          height: 177.5,
-          depth: 54.5,
-          voltage: 220,
-          energyClass: 'B',
-          features: ['inverter'],
-          price: 65990,
-          isBuiltIn: true,
-          freezerVolume: 69,
-          fridgeVolume: 193,
-          url: 'https://www.bshop.co.rs/proizvodi/frizideri/beko-bcha275e3sn',
-          imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
-        },
-        {
-          id: 'washing-machine1',
+          id: 'washing1',
           type: 'washing-machine',
-          name: 'BEKO WUE7512XWST',
+          name: 'WUE6512BA',
+          width: 60,
+          height: 84,
+          depth: 44,
+          voltage: 220,
+          energyClass: 'D',
+          features: ['steamcure', 'aquawave'],
+          price: 35000,
+          capacityKg: 6,
+          rpm: 1000,
+          loadType: 'front-load',
+          url: 'https://www.beko.com/rs-sr/proizvodi/samostoje%C4%87e-ma%C5%A1ine-za-pranje-ve%C5%A1a/samostoje%C4%87a-ve%C5%A1-ma%C5%A1ina-6-kg-1000-rpm-wue-6512-ba',
+          imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
+        },
+        {
+          id: 'washing2',
+          type: 'washing-machine',
+          name: 'WUE7612XST',
           width: 60,
           height: 84,
           depth: 49,
           voltage: 220,
           energyClass: 'B',
-          features: ['inverter', 'eco'],
-          price: 39990,
+          features: ['prosmart', 'energispin'],
+          price: 45000,
           capacityKg: 7,
-          rpm: 1000,
+          rpm: 1200,
           loadType: 'front-load',
-          url: 'https://www.bshop.co.rs/proizvodi/ves-masine/beko-wue7512xwst',
+          url: 'https://www.beko.com/rs-sr/proizvodi/samostoje%C4%87e-ma%C5%A1ine-za-pranje-ve%C5%A1a/samostoje%C4%87a-ve%C5%A1-ma%C5%A1ina-7-kg-1200-rpm-wue7612xst',
           imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
         },
         {
-          id: 'washing-machine2',
+          id: 'washing3',
           type: 'washing-machine',
-          name: 'BEKO HTV8736XCST',
+          name: 'BM3WFSU39413WPBB1',
           width: 60,
           height: 84,
           depth: 55,
           voltage: 220,
-          energyClass: 'B',
-          features: ['steam', 'smart'],
-          price: 72990,
-          capacityKg: 8,
+          energyClass: 'A',
+          features: ['aquatech', 'prosmart', 'energispin'],
+          price: 55000,
+          capacityKg: 9,
           rpm: 1400,
           loadType: 'front-load',
-          url: 'https://www.bshop.co.rs/proizvodi/ves-masine/beko-htv8736xcst',
+          url: 'https://www.beko.com/rs-sr/proizvodi/samostoje%C4%87e-ma%C5%A1ine-za-pranje-ve%C5%A1a/samostoje%C4%87a-ve%C5%A1-ma%C5%A1ina-9-kg-1400-rpm-bm3wfsu39413wpbb1',
           imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
         },
         {
-          id: 'dishwasher1',
+          id: 'fridge1',
+          type: 'fridge',
+          name: 'B5RMLNE444HX',
+          width: 59.5,
+          height: 186.5,
+          depth: 66.3,
+          voltage: 220,
+          energyClass: 'E',
+          features: ['harvestfresh', 'nofrost'],
+          price: 65000,
+          isBuiltIn: false,
+          freezerVolume: 100,
+          fridgeVolume: 265,
+          url: 'https://www.beko.com/rs-sr/proizvodi/frizideri/frizider-frizider-365-l-b5rmlne444hx',
+          imageUrl: 'https://www.beko.com/content/dam/serbia-rs-aem/serbia-rs-aemProductCatalog/product-images/7278340596-B5RMLNE444HX/7278340596-LO3-20220605-165845.png/jcr:content/renditions/original'
+        },
+        {
+          id: 'fridge2',
+          type: 'fridge',
+          name: 'GNE60531XN',
+          width: 84,
+          height: 182.5,
+          depth: 74.5,
+          voltage: 220,
+          energyClass: 'E',
+          features: ['harvestfresh', 'coolroom'],
+          price: 120000,
+          isBuiltIn: false,
+          freezerVolume: 149,
+          fridgeVolume: 378,
+          url: 'https://www.beko.com/rs-sr/proizvodi/kombinovani-fri%C5%BEideri/fri%C5%BEider-sa-zamrziva%C4%8Dem-vi%C5%A1e-vrata-84-cm-gne60531xn',
+          imageUrl: 'https://www.beko.com/content/dam/serbia-rs-aem/serbia-rs-aemProductCatalog/product-images/7293443188-GNE60531XN/7293443188-LO3-20210225-131747.png/jcr:content/renditions/original'
+        },
+        {
+          id: 'dish1',
           type: 'dishwasher',
-          name: 'BEKO BDI1410',
+          name: 'BDFN36560XC',
           width: 60,
-          height: 82,
-          depth: 55,
+          height: 85,
+          depth: 60,
           voltage: 220,
-          energyClass: 'A',
-          features: [],
-          price: 49990,
-          placeSettings: 12,
-          url: 'https://www.bshop.co.rs/proizvodi/masine-za-sudove/beko-bdi1410',
+          energyClass: 'C',
+          features: ['deepwash', 'fastplus'],
+          price: 55000,
+          placeSettings: 15,
+          url: 'https://www.beko.com/rs-sr/proizvodi/samostojece-masine-za-pranje-sudova/samostojeca-masina-za-pranje-sudova-15-kapacitet-pranja-standardna-sirina-bdfn36560xc',
           imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
         },
-        
         {
-          id: 'washing-machine3',
-          type: 'washing-machine',
-          name: 'BEKO WUE 6511 XWW mašina za pranje veša',
+          id: 'dish2',
+          type: 'dishwasher',
+          name: 'BDFN36650XC',
           width: 60,
-          height: 82,
-          depth: 55,
+          height: 85,
+          depth: 60,
           voltage: 220,
-          energyClass: 'A',
-          features: [],
-          capacityKg: 8,
-          price: 28409,
-          rpm: 1400,
-          loadType: 'front-load',
-          url: 'https://www.bshop.co.rs/rs/Beko-Masine-za-pranje-vesa/BEKO/BEKO-WUE-6511-XWW-masina-za-pranje-vesa-p2776c107.html',
-          imageUrl: 'https://www.bshop.co.rs/image/cache/catalog/feed_7/2776-ELE01977_v-330x330-0-1269212693.jpg'
+          energyClass: 'B',
+          features: ['deepwash', 'autodose'],
+          price: 65000,
+          placeSettings: 16,
+          url: 'https://www.beko.com/rs-sr/proizvodi/samostojece-masine-za-pranje-sudova/samostojeca-masina-za-pranje-sudova-16-kapacitet-pranja-standardna-sirina-bdfn36650xc',
+          imageUrl: 'https://cdn.shopify.com/s/files/1/0612/8157/2765/products/rcna366e40zxbn_front_v01.png?v=1682591605'
         },
-
-        // Add more sample data...
       ];
-      
+
       const renderDynamicFields = (applianceType) => {
           let html = '';
           if (applianceType === 'fridge') {
               html = `
-                  
                   <div class="form-row">
                     <label for="min-fridge-volume">Min. zapremina frižidera (L):
                         <input type="number" id="min-fridge-volume" name="min-fridge-volume" min="0" step="10">
@@ -566,20 +609,23 @@
                         <input type="number" id="max-fridge-volume" name="max-fridge-volume" min="0" step="10">
                     </label>
                   </div>
-                   
+                  
+                <fieldset style="font-size: 1.2em; margin-top: 20px">
+                  <legend style="font-size: 1.2em;">Tehnologije</legend>
                   <label class="checkbox-label">
                     <input type="checkbox" id="is-built-in" name="is-built-in" value="true"> Ugradni?
                 </label>
-              
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="harvestfresh"> HarvestFresh</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="nofrost"> NoFrost</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="coolroom"> CoolRoom</label>
+                </fieldset>
               `;
           } else if (applianceType === 'washing-machine') {
               html = `
               <label for="capacity-kg">Minimalni kapacitet pranja (kg):
                       <input type="number" id="capacity-kg" name="capacity-kg" min="5" max="12" step="1">
                   </label>
-
               <div class="form-row appliance-fields">
-                  
                   <label for="rpm">Broj obrtaja centrifuge (RPM):
                       <select id="rpm" name="rpm">
                           <option value="">Bilo koji</option>
@@ -596,17 +642,28 @@
                           <option value="top-load">Punjenje odozgo</option>
                       </select>
                   </label>
-
                 </div>
+                <fieldset style="font-size: 1.2em; margin-top: 20px">
+                  <legend style="font-size: 1.2em;">Tehnologije</legend>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="aquatech"> AquaTech</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="steamcure"> SteamCure</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="prosmart"> ProSmart Motor</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="energispin"> EnergySpin</label>
+                </fieldset>
               `;
           } else if (applianceType === 'dishwasher') {
               html = `
                   <label for="place-settings">Minimalni broj setova posuđa:
                       <input type="number" id="place-settings" name="place-settings" min="6" max="16">
                   </label>
+                <fieldset style="font-size: 1.2em; margin-top: 20px">
+                  <legend>Tehnologije</legend>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="deepwash"> DeepWash</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="fastplus"> Fast+</label>
+                  <label class="checkbox-label"><input type="checkbox" name="features" value="autodose"> AutoDose</label>
+                </fieldset>
               `;
           }
-          
           dynamicFieldsContainer.innerHTML = html;
       };
 
@@ -649,59 +706,103 @@
           compatBtn.setAttribute('aria-expanded', 'false');
         }
       });
-      
+
       compatForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const applianceType = applianceTypeSelect.value;
-        const width = parseFloat(document.getElementById('width').value);
-        const height = parseFloat(document.getElementById('height').value);
-        const depth = parseFloat(document.getElementById('depth').value);
-        const voltage = parseInt(document.getElementById('voltage').value);
-        const energyClass = document.getElementById('energy-class').value;
+
         const minPrice = parseInt(document.getElementById('min-price').value) || 0;
         const maxPrice = parseInt(document.getElementById('max-price').value) || Infinity;
-        
-        // Dynamic fields values
-        const minFreezerVolume = parseFloat(document.getElementById('min-freezer-volume')?.value) || 0;
-        const maxFreezerVolume = parseFloat(document.getElementById('max-freezer-volume')?.value) || Infinity;
-        const minFridgeVolume = parseFloat(document.getElementById('min-fridge-volume')?.value) || 0;
-        const maxFridgeVolume = parseFloat(document.getElementById('max-fridge-volume')?.value) || Infinity;
-        const isBuiltIn = document.getElementById('is-built-in')?.checked || false;
-        const capacityKg = parseFloat(document.getElementById('capacity-kg')?.value) || 0;
-        const rpm = parseInt(document.getElementById('rpm')?.value) || 0;
-        const loadType = document.getElementById('load-type')?.value;
-        const placeSettings = parseInt(document.getElementById('place-settings')?.value) || 0;
+        if (minPrice > maxPrice) {
+          resultsDiv.innerHTML = '<p class="error">Minimalna cena ne može biti veća od maksimalne.</p>';
+          return;
+        }
 
-        const filtered = products.filter(product => {
-            const matchesType = product.type === applianceType;
-            const matchesDimensions = product.width <= width && product.height <= height && product.depth <= depth;
-            const matchesVoltage = product.voltage === voltage;
-            const matchesEnergyClass = energyClass ? product.energyClass === energyClass : true;
-            const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
-            
-            if (applianceType === 'fridge') {
-                return matchesType && matchesDimensions && matchesVoltage && matchesEnergyClass && matchesPrice &&
-                       (isBuiltIn ? product.isBuiltIn === isBuiltIn : true) &&
-                       (product.freezerVolume >= minFreezerVolume && product.freezerVolume <= maxFreezerVolume) &&
-                       (product.fridgeVolume >= minFridgeVolume && product.fridgeVolume <= maxFridgeVolume);
-            } else if (applianceType === 'washing-machine') {
-                return matchesType && matchesDimensions && matchesVoltage && matchesEnergyClass && matchesPrice &&
-                       (capacityKg ? product.capacityKg >= capacityKg : true) &&
-                       (rpm ? product.rpm >= rpm : true) &&
-                       (loadType ? product.loadType === loadType : true);
-            } else if (applianceType === 'dishwasher') {
-                return matchesType && matchesDimensions && matchesVoltage && matchesEnergyClass && matchesPrice &&
-                       (placeSettings ? product.placeSettings >= placeSettings : true);
+        resultsDiv.innerHTML = '<p class="loading">Učitavanje rezultata...</p>';
+
+        setTimeout(() => {
+          const applianceType = applianceTypeSelect.value;
+          const width = parseFloat(document.getElementById('width').value);
+          const height = parseFloat(document.getElementById('height').value);
+          const depth = parseFloat(document.getElementById('depth').value);
+          const voltage = parseInt(document.getElementById('voltage').value);
+          const energyClass = document.getElementById('energy-class').value;
+          const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked')).map(input => input.value);
+
+          const minFreezerVolume = parseFloat(document.getElementById('min-freezer-volume')?.value) || 0;
+          const maxFreezerVolume = parseFloat(document.getElementById('max-freezer-volume')?.value) || Infinity;
+          const minFridgeVolume = parseFloat(document.getElementById('min-fridge-volume')?.value) || 0;
+          const maxFridgeVolume = parseFloat(document.getElementById('max-fridge-volume')?.value) || Infinity;
+          const isBuiltIn = document.getElementById('is-built-in')?.checked || false;
+          const capacityKg = parseFloat(document.getElementById('capacity-kg')?.value) || 0;
+          const rpm = parseInt(document.getElementById('rpm')?.value) || 0;
+          const loadType = document.getElementById('load-type')?.value;
+          const placeSettings = parseInt(document.getElementById('place-settings')?.value) || 0;
+
+          let filtered = products.filter(product => {
+              const matchesType = product.type === applianceType;
+              const matchesDimensions = product.width <= width && product.height <= height && product.depth <= depth;
+              const matchesVoltage = product.voltage === voltage;
+              const matchesEnergyClass = energyClass ? product.energyClass === energyClass : true;
+              const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+              const matchesFeatures = selectedFeatures.every(f => product.features.includes(f));
+
+              if (applianceType === 'fridge') {
+                  return matchesType && matchesDimensions && matchesVoltage && matchesEnergyClass && matchesPrice && matchesFeatures &&
+                         (isBuiltIn ? product.isBuiltIn === isBuiltIn : true) &&
+                         (product.freezerVolume >= minFreezerVolume && product.freezerVolume <= maxFreezerVolume) &&
+                         (product.fridgeVolume >= minFridgeVolume && product.fridgeVolume <= maxFridgeVolume);
+              } else if (applianceType === 'washing-machine') {
+                  return matchesType && matchesDimensions && matchesVoltage && matchesEnergyClass && matchesPrice && matchesFeatures &&
+                         (capacityKg ? product.capacityKg >= capacityKg : true) &&
+                         (rpm ? product.rpm >= rpm : true) &&
+                         (loadType ? product.loadType === loadType : true);
+              } else if (applianceType === 'dishwasher') {
+                  return matchesType && matchesDimensions && matchesVoltage && matchesEnergyClass && matchesPrice && matchesFeatures &&
+                         (placeSettings ? product.placeSettings >= placeSettings : true);
+              }
+              return false;
+          });
+
+          filtered.sort((a, b) => a.price - b.price);
+
+          let resultsHtml = '';
+          if (filtered.length > 0) {
+            resultsHtml += `<select id="sort-select">
+              <option value="price-asc">Cena rastuća</option>
+              <option value="price-desc">Cena opadajuća</option>
+            </select>`;
+            resultsHtml += `<p>Proizvodi po vašim kriterijumima:</p>`;
+            resultsHtml += renderProducts(filtered);
+          } else {
+            resultsHtml = `<p>Nažalost, nema proizvoda koji odgovaraju izabranim kriterijumima. Pokušajte sa širim dimenzijama ili manje filtera.</p>`;
+            const alternatives = products.filter(p => p.type === applianceType).slice(0, 3);
+            if (alternatives.length > 0) {
+              resultsHtml += `<p>Evo nekih sličnih proizvoda:</p>`;
+              resultsHtml += renderProducts(alternatives);
             }
+          }
+          resultsDiv.innerHTML = resultsHtml;
 
-            return false;
-        });
+          const sortSelect = document.getElementById('sort-select');
+          if (sortSelect) {
+            sortSelect.addEventListener('change', (e) => {
+              const sortValue = e.target.value;
+              if (sortValue === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+              } else if (sortValue === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+              }
+              resultsDiv.innerHTML = `<select id="sort-select"><option value="price-asc">Cena rastuća</option><option value="price-desc">Cena opadajuća</option></select>
+              <p>Proizvodi po vašim kriterijumima:</p>` + renderProducts(filtered);
+            });
+          }
+        }, 500);
+      });
 
-        resultsDiv.innerHTML = filtered.length ?
-        `<p>Proizvodi po vašim kriterijumima:</p>` +
-        filtered.map(p => `
+      function renderProducts(filteredProducts) {
+        return filteredProducts.map(p => `
             <div class="product-item">
-            <img src="${p.imageUrl}" alt="${p.name}" class="product-image">
+            <img src="${p.imageUrl}" alt="${p.name}">
             <div>
                 <strong>${p.name}</strong><br>
                 Cena: ${p.price} RSD<br>
@@ -709,9 +810,8 @@
                 <a href="${p.url}" target="_blank">Pogledaj proizvod</a>
             </div>
             </div>
-        `).join('') :
-        `<p>Nažalost, nema proizvoda koji odgovaraju izabranim kriterijumima.</p>`;
-      });
+        `).join('');
+      }
 
       if (!applianceTypeSelect.value) {
           initialPrompt.style.display = 'block';
